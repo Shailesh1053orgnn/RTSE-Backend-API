@@ -1,7 +1,7 @@
 import express from "express";
 import authenticateToken from "../authToken.js";
 const router = express.Router();
-import {splashScreenController } from "../controllers/splashscreenController.js";
+import {splashScreenController } from "../controllers/splashScreenController.js";
 import multer from 'multer';
 import path from "path";
 var storage = multer.diskStorage({
