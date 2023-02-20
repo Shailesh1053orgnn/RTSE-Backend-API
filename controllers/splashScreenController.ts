@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { SplashScreenModel } from '../@types/SplashScreenType.js';
-import { splashScreenModel } from '../models/Splashscreen.model.js';
+import { SplashScreenModel } from '../@types/splashScreenType.js';
+import { splashScreenModel } from '../models/splashscreen.model.js';
 
  export class splashScreenController{
    static async saveImage(req:Request, res: Response){

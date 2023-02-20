@@ -4,8 +4,7 @@ interface IsignupModel extends RowDataPacket{
     mobileNo: string
     userEmail: string
     createdDate: string
-    otp:number
-    
+    otp:number   
 }
 export type {
     IsignupModel

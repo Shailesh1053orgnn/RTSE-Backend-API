@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
-import { IStateModel} from '../@types/stateTypes';
+import { IStateModel} from '../@types/stateType';
 //Call object create
-export class stateMgmtModel {
+export class stateModel {
     findAll = async function (): Promise<IStateModel[]> { 
         const dbConn = await mysql.createConnection({
             host     : process.env.HOST,
@@ -24,8 +24,5 @@ export class stateMgmtModel {
         await dbConn.connect();
         const [results] = await dbConn.query<IStateModel[]>("SELECT *from state where state_id= ?", [state_id]);
         return results;
-       
-    }
-   
-    
+    }   
 };

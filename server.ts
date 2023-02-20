@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';  
 import bodyParser from 'body-parser';
-import splashscreenRouter from './routes/splashscreen.route.js';
+import splashscreenRouter from './routes/splashScreen.route.js';
 import signupRouter from './routes/signup.route.js';
 import loginRouter from './routes/login.route.js';
 import otpRouter from './routes/otp.route.js';

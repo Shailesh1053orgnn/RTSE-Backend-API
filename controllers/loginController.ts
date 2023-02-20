@@ -16,8 +16,7 @@ export class loginController {
         {
             res.send({'token': '', 'error': 'Incorrect OTP'});
         }
-    }
-    
+    } 
 }
 function generateAccessToken(otp) {
     return (jwt.sign(otp, process.env.SECRET_KEY, { expiresIn: '1d' }));

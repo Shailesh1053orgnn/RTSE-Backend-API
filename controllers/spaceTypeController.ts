@@ -1,5 +1,5 @@
 import {Request,Response,NextFunction} from 'express';
-import {ISpaceTypeModel} from '../@types/spacetypeType.js';
+import {ISpaceTypeModel} from '../@types/spaceTypeType.js';
 import {spaceTypeModel} from '../models/spaceType.model.js';
 export class spaceTypeController {
     static async findAll(req: Request, res: Response) {
