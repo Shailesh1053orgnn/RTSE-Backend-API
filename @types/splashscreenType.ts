@@ -4,8 +4,7 @@ interface SplashScreenModel extends RowDataPacket{
     fileURL: string
     fileType: string
     fileSize: string
-    fileDescription:string
-    
+    fileDescription:string   
 }
 export type {
     SplashScreenModel
