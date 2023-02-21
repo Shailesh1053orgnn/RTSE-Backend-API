@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 //local mysql db connection
 const dbConn = mysql.createConnection({
-  host     : process.env.HOST,
-  user     : process.env.USER,
-  password : process.env.PASSWORD,
-  database : process.env.DATABASE
+  host     : 'joshi-test-2.cluster-crczv8slwvn6.us-east-1.rds.amazonaws.com',
+  user     : 'admin',
+  password : 'Delhi123$',
+  database : 'rtsc_sports'
 });
 // const mailjet = Mailjet.apiConnect(
 //   process.env.MJ_APIKEY_PUBLIC,

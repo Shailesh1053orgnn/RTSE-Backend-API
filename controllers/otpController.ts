@@ -14,7 +14,7 @@ export class otpController {
               });
               
               const accountSid = "ACfabcbe7eb5b53e67caa46b6e8029c38c";
-const authToken = "bcda664d94927562cc5a1d6fb918b008";
+const authToken = "c148e2ad7952382dd854a90481f056a7";
 const client =twilio(accountSid, authToken);
 client.messages
   .create({
