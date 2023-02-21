@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise';
+import  dbConn from '../config/conn.js';
 import { SplashScreenModel } from '../@types/splashScreenType';
 //property Image object
 export class splashScreenModel {
@@ -15,15 +15,8 @@ export class splashScreenModel {
         this. fileSize= fileSize;
         this.fileDescription= fileDescription;
         this.createdDate= createdDate;
-        
-        const dbConn = await mysql.createConnection({
-            host     : process.env.HOST,
-            user     : process.env.USER,
-            password : process.env.PASSWORD,
-            database : process.env.DATABASE
-          });
-        await dbConn.connect();
-        let result = await dbConn.query(
+        await (await dbConn).connect();
+        let result = await (await dbConn).query(
             "INSERT INTO `splashscreen`(`fileName`, `fileURL`, `fileType`, `fileSize`, `fileDescription`, `createdDate`) VALUES (?,?,?,?,?,?)",
             [fileName, fileURL, fileType, fileSize, fileDescription, createdDate]
         );
@@ -34,14 +27,8 @@ export class splashScreenModel {
         }
     }
     findAll = async function (): Promise<SplashScreenModel[]> { 
-        const dbConn = await mysql.createConnection({
-            host     : process.env.HOST,
-            user     : process.env.USER,
-            password : process.env.PASSWORD,
-            database : process.env.DATABASE
-          });
-        await dbConn.connect();
-        const [results] = await dbConn.query<SplashScreenModel[]>("select * from splashscreen");
+        await (await dbConn).connect();
+        const [results] = await (await dbConn).query<SplashScreenModel[]>("select * from splashscreen");
        return results;
     }
     

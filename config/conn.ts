@@ -1,5 +1,7 @@
 import mysql from 'mysql2/promise';
 import Mailjet from 'node-mailjet';
+import dotenv from 'dotenv';
+dotenv.config();
 //local mysql db connection
 const dbConn = mysql.createConnection({
   host     : process.env.HOST,
@@ -7,13 +9,13 @@ const dbConn = mysql.createConnection({
   password : process.env.PASSWORD,
   database : process.env.DATABASE
 });
-const mailjet = Mailjet.apiConnect(
-  process.env.MJ_APIKEY_PUBLIC,
-  process.env.MJ_APIKEY_PRIVATE,
-  {
-    config: {},
-    options: {}
-  } 
-);
+// const mailjet = Mailjet.apiConnect(
+//   process.env.MJ_APIKEY_PUBLIC,
+//   process.env.MJ_APIKEY_PRIVATE,
+//   {
+//     config: {},
+//     options: {}
+//   } 
+// );
 
-export default { dbConn,mailjet };
+export default dbConn;

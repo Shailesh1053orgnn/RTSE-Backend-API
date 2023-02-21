@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise';
+import  dbConn from '../config/conn.js';
 import { IsignupModel } from '../@types/signupType';
 //affiliate object create
 export class signupModel {
@@ -13,16 +13,10 @@ export class signupModel {
         this.userEmail = userEmail;
         this.otp=otp;
         this.createdDate = createdDate;   
-        const dbConn = await mysql.createConnection({
-            host     : process.env.HOST,
-            user     : process.env.USER,
-            password : process.env.PASSWORD,
-            database : process.env.DATABASE
-          });
-        await dbConn.connect();
+        await (await dbConn).connect();
         let sqlQuery="INSERT INTO `users` (fullName, mobileNo, userEmail, otp, createdDate) VALUES (?,?,?,?,?)"
         let inserts= [fullName, mobileNo, userEmail, otp, createdDate]
-        let result = await dbConn.query(sqlQuery, inserts)
+        let result = await (await dbConn).query(sqlQuery, inserts)
         if (!result) {
             return "Error Occured";
         } else {
