@@ -40,5 +40,4 @@ router.get('/', splashScreenController.findAll);
 // router.get('/:image_id', splashScreenController.findById);
 // router.put('/:image_id',  splashScreenController.update);
 // router.delete('/:image_id', splashScreenController.delete);
-
 export default router;
