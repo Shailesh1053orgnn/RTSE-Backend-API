@@ -13,14 +13,14 @@ export class otpController {
                 create_at: new Date(),
               });
               
-              const accountSid = "ACb686b5442482641faffedc962cce3015";
-const authToken = "935bf3ad237bd87e5f233e78934445e7";
+              const accountSid = "ACfabcbe7eb5b53e67caa46b6e8029c38c";
+const authToken = "bcda664d94927562cc5a1d6fb918b008";
 const client =twilio(accountSid, authToken);
 client.messages
   .create({
     body: 'Your OTP for login: '+OTP,
     to: '+91'+req.body.mobileNo, // Text this number
-    from: '+16692051159', // From a valid Twilio number
+    from: '+19137529762', // From a valid Twilio number
   })
   .then((message) => console.log(message.sid));
             res.status(200);

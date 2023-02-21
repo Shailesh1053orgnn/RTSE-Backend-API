@@ -14,8 +14,8 @@ export class signupModel {
         this.otp=otp;
         this.createdDate = createdDate;   
         await (await dbConn).connect();
-        let sqlQuery="INSERT INTO `users` (fullName, mobileNo, userEmail, otp, createdDate) VALUES (?,?,?,?,?)"
-        let inserts= [fullName, mobileNo, userEmail, otp, createdDate]
+        let sqlQuery="INSERT INTO `users` (fullName, mobileNo, userEmail, createdDate) VALUES (?,?,?,?)"
+        let inserts= [fullName, mobileNo, userEmail, createdDate]
         let result = await (await dbConn).query(sqlQuery, inserts)
         if (!result) {
             return "Error Occured";
