@@ -10,6 +10,8 @@ import otpRouter from './routes/otp.route.js';
 import stateRouter from './routes/state.route.js';
 import academyRouter from './routes/academy.route.js';
 import spaceTypeRouter from './routes/spaceType.route.js';
+import baseurlRouter from './routes/baseurl.route.js';
+import sportsRouter from './routes/sports.route.js';
 const app = express();
 //cors policy
 app.use(cors())
@@ -24,6 +26,8 @@ app.use('/api/otp',otpRouter);
 app.use('/api/state',stateRouter);
 app.use('/api/academy',academyRouter);
 app.use('/api/spaceType',spaceTypeRouter);
+app.use('/api/baseurl',baseurlRouter);
+app.use('/api/sports',sportsRouter);
 app.use('*',(req, res) =>{
   res.status(404).send('Route Not found');
 });

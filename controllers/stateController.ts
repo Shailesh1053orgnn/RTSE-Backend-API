@@ -13,8 +13,11 @@ export class StateController {
         const returnValue: IStateModel[] = await state.findById({
             state_id:req.params.state_id
         });
-        res.status(200);
-        res.send(returnValue);
+        if(returnValue.length > 0){
+            res.status(200).send({ "status": 200, "success": true, data:returnValue});
+        }else{
+            res.status(200).send({"status": 200, "success": false, message:"Data Not found"});
+        }
     }
     
     

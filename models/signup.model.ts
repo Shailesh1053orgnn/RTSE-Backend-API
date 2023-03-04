@@ -7,12 +7,12 @@ export class signupModel {
     userEmail: string = "";
     createdDate: string = "";
     otp:number;
-    register = async function ({ fullName, mobileNo,otp, userEmail, createdDate }): Promise<string> {    
+    register = async function ({ fullName, mobileNo,otp, userEmail }): Promise<string> {    
         this.fullName = fullName;
         this.mobileNo = mobileNo;
         this.userEmail = userEmail;
         this.otp=otp;
-        this.createdDate = createdDate;   
+        let createdDate = new Date;   
         await (await dbConn).connect();
         let sqlQuery="INSERT INTO `users` (fullName, mobileNo, userEmail, createdDate) VALUES (?,?,?,?)"
         let inserts= [fullName, mobileNo, userEmail, createdDate]

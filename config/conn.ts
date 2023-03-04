@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 //local mysql db connection
 const dbConn = mysql.createConnection({
-  host     : 'joshi-test-2.cluster-crczv8slwvn6.us-east-1.rds.amazonaws.com',
-  user     : 'admin',
-  password : 'Delhi123$',
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
   database : 'rtsc_sports'
 });
 // const mailjet = Mailjet.apiConnect(
