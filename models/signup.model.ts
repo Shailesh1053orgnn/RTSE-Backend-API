@@ -1,4 +1,4 @@
-import  dbConn from '../config/conn.js';
+import  pool from '../config/conn.js';
 import { IsignupModel } from '../@types/signupType';
 //affiliate object create
 export class signupModel {
@@ -13,10 +13,10 @@ export class signupModel {
         this.userEmail = userEmail;
         this.otp=otp;
         let createdDate = new Date;   
-        await (await dbConn).connect();
+        const connection = await pool.getConnection();
         let sqlQuery="INSERT INTO `users` (fullName, mobileNo, userEmail, createdDate) VALUES (?,?,?,?)"
         let inserts= [fullName, mobileNo, userEmail, createdDate]
-        let result = await (await dbConn).query(sqlQuery, inserts)
+        let result = await connection.execute (sqlQuery, inserts)
         if (!result) {
             return "Error Occured";
         } else {

@@ -1,4 +1,4 @@
-import dbConn from '../config/conn.js';
+import pool from '../config/conn.js';
 import { SplashScreenModel } from '../@types/splashScreenType';
 //property Image object
 export class splashScreenModel {
@@ -15,8 +15,8 @@ export class splashScreenModel {
         this.fileSize = fileSize;
         this.fileDescription = fileDescription;
         this.createdDate = createdDate;
-        await (await dbConn).connect();
-        let result = await (await dbConn).query(
+        const connection = await pool.getConnection();
+        let result = await connection.execute (
             "INSERT INTO `splashscreen`(`fileName`, `fileURL`, `fileType`, `fileSize`, `fileDescription`, `createdDate`) VALUES (?,?,?,?,?,?)",
             [fileName, fileURL, fileType, fileSize, fileDescription, createdDate]
         );
@@ -27,8 +27,8 @@ export class splashScreenModel {
         }
     }
     findAll = async function (): Promise<SplashScreenModel[]> {
-        await (await dbConn).connect();
-        const [results] = await (await dbConn).query<SplashScreenModel[]>("select * from splashscreen");
+        const connection = await pool.getConnection();
+        const [results] = await connection.execute <SplashScreenModel[]>("select * from splashscreen");
         return results;
     }
 

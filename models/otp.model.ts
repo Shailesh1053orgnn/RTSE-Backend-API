@@ -1,4 +1,4 @@
-import dbConn from '../config/conn.js';
+import pool from '../config/conn.js';
 import { IotpModel, IotpdeleteModel } from '../@types/otpType';
 //affiliate object create
 export class otpModel {
@@ -9,28 +9,28 @@ export class otpModel {
         this.mobileNo = mobileNo;
         this.otp = otp;
         this.create_at = create_at;
-        await (await dbConn).connect();
-        const [results] = await (await dbConn).query<IotpModel[]>("SELECT * FROM users where mobileNo=?", [mobileNo]);
+        const connection = await pool.getConnection();
+        const [results] = await connection.execute <IotpModel[]>("SELECT * FROM users where mobileNo=?", [mobileNo]);
         if (results.length == 0) {
             return "user not exist";
         } else {
             let sqlQuery = "INSERT INTO `otpexpiry` (mobileNo,otp, create_at) VALUES (?,?,?)"
             let inserts = [mobileNo, otp, create_at]
-            let userResult = await (await dbConn).query(sqlQuery, inserts)
+            let userResult = await connection.execute (sqlQuery, inserts)
             return "Ready For otp"
         }
     }
     verifyotp = async function (otp): Promise<IotpModel[]> {
-        await (await dbConn).connect();
+        const connection = await pool.getConnection();
         var createdDate = new Date();
-        const [results] = await (await dbConn).query<IotpModel[]>("SELECT * FROM otpexpiry where otp=?", [otp]);
-        let result = await (await dbConn).query("DELETE FROM `otpexpiry` WHERE otp =?", [otp]);
+        const [results] = await connection.execute <IotpModel[]>("SELECT * FROM otpexpiry where otp=?", [otp]);
+        let result = await connection.execute ("DELETE FROM `otpexpiry` WHERE otp =?", [otp]);
         if (results != null) {
-            const [exist] = await (await dbConn).query<IotpModel[]>("SELECT * FROM users where mobileNo=?", [results[0].mobileNo]);
+            const [exist] = await connection.execute <IotpModel[]>("SELECT * FROM users where mobileNo=?", [results[0].mobileNo]);
             if (exist[0] == null) {
-                await (await dbConn).query("INSERT INTO `users` (mobileNo,createdDate) VALUES (?,?)", [results[0].mobileNo, createdDate]);
+                await connection.execute ("INSERT INTO `users` (mobileNo,createdDate) VALUES (?,?)", [results[0].mobileNo, createdDate]);
             } else {
-                await (await dbConn).query("UPDATE `users` SET mobileNo=?,createdDate=? WHERE mobileNo=? ", [exist[0].mobileNo, createdDate, exist[0].mobileNo]);
+                await connection.execute ("UPDATE `users` SET mobileNo=?,createdDate=? WHERE mobileNo=? ", [exist[0].mobileNo, createdDate, exist[0].mobileNo]);
             }
         }
         return results;

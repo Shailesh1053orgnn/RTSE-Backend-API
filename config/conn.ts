@@ -3,7 +3,8 @@ import Mailjet from 'node-mailjet';
 import dotenv from 'dotenv';
 dotenv.config();
 //local mysql db connection
-const dbConn = mysql.createConnection({
+const pool = mysql.createPool({
+  connectionLimit: 10,
   host     : 'rtse-sports.cmihklc4k4mb.ap-south-1.rds.amazonaws.com',
   user     : 'admin',
   password : 'Delhi123$',
@@ -18,4 +19,4 @@ const dbConn = mysql.createConnection({
 //   } 
 // );
 
-export default dbConn;
+export default pool;
