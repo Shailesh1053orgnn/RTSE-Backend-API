@@ -12,6 +12,7 @@ import academyRouter from './routes/academy.route.js';
 import spaceTypeRouter from './routes/spaceType.route.js';
 import baseurlRouter from './routes/baseurl.route.js';
 import sportsRouter from './routes/sports.route.js';
+import academyOffersRouter from './routes/academyOffers.route.js';
 const app = express();
 //cors policy
 app.use(cors())
@@ -28,6 +29,7 @@ app.use('/api/academy',academyRouter);
 app.use('/api/spaceType',spaceTypeRouter);
 app.use('/api/baseurl',baseurlRouter);
 app.use('/api/sports',sportsRouter);
+app.use('/api/academyOffers',academyOffersRouter);
 app.use('*',(req, res) =>{
   res.status(404).send('Route Not found');
 });

@@ -5,8 +5,11 @@ export class sportsController {
     static async findAll(req: Request, res: Response) {
         const sports = new sportsModel();
         const returnValue: ISportsModel[] = await sports.findAll();
-        res.status(200);
-        res.send(returnValue);
+        if (returnValue.length > 0) {
+            res.status(200).send({ Response: { "status": 200, "success": true, data: returnValue } });
+        } else {
+            res.status(200).send({ Response: { "status": 200, "success": true, message: "Data Not found" } });
+        }
     }
     static async findByName(req: Request, res: Response) {
         const sports = new sportsModel();

@@ -41,7 +41,7 @@ export class otpController {
         const returnValue: IotpModel[] = await otp.verifyotp(req.params.verifyotp);
 
         if (returnValue.length > 0) {
-            const token = generateAccessToken({ otp: req.params.verifyotp });
+            const token = generateAccessToken({ otp: req.query.verifyotp });
             res.status(200).send({ "status": 200, "success": true, message: token });
         }
         else {

@@ -14,13 +14,19 @@ export class splashScreenController {
             createdDate: new Date()
 
         });
-        res.status(200);
-        res.send(returnValue);
+        if (returnValue.length > 0) {
+            res.status(200).send({ Response: { "status": 200, "success": true, data: returnValue } });
+        } else {
+            res.status(200).send({ Response: { "status": 200, "success": true, message: "Data Not found" } });
+        }
     }
     static async findAll(req: Request, res: Response) {
         const image = new splashScreenModel();
         const returnValue: SplashScreenModel[] = await image.findAll();
-        res.status(200);
-        res.send(returnValue);
+        if (returnValue.length > 0) {
+            res.status(200).send({ Response: { "status": 200, "success": true, data: returnValue } });
+        } else {
+            res.status(200).send({ Response: { "status": 200, "success": true, message: "Data Not found" } });
+        }
     }
 }

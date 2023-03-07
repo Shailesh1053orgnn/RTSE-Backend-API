@@ -5,18 +5,21 @@ export class academyController {
     static async findAll(req: Request, res: Response) {
         const state = new academyModel();
         const returnValue: IAcademyModel[] = await state.findAll();
-        res.status(200);
-        res.send(returnValue);
+        if (returnValue.length > 0) {
+            res.status(200).send({ "status": 200, "success": true, data: returnValue });
+        } else {
+            res.status(200).send({ "status": 200, "success": true, message: "Data Not found" });
+        }
     }
-    static async findByLocation(req: Request, res: Response) {
+    static async findById(req: Request, res: Response) {
         const state = new academyModel();
-        const returnValue: IAcademyModel[] = await state.findByLocation({
-            location: req.params.location
+        const returnValue: IAcademyModel[] = await state.findById({
+            academy_id: req.query.academy_id
         });
         if (returnValue.length > 0) {
             res.status(200).send({ "status": 200, "success": true, data: returnValue });
         } else {
-            res.status(200).send({ "status": 200, "success": false, message: "Data Not found" });
+            res.status(200).send({ "status": 200, "success": true, message: "Data Not found" });
         }
     }
 
