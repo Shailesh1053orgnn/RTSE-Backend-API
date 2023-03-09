@@ -14,7 +14,7 @@ export class sportsController {
     static async findByName(req: Request, res: Response) {
         const sports = new sportsModel();
         const returnValue: ISportsModel[] = await sports.findByName({
-            sportsname: req.params.sportsname
+            sportsname: req.query.sportsname
         });
         if (returnValue.length > 0) {
             res.status(200).send({ "status": 200, "success": true, "message": returnValue });
