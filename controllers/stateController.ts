@@ -6,9 +6,9 @@ export class StateController {
         const state = new stateModel();
         const returnValue: IStateModel[] = await state.findAll();
         if (returnValue.length > 0) {
-            res.status(200).send({Response: { "status": 200, "success": true, data: returnValue }});
+            res.status(200).send({ Response: { "status": 200, "success": true, data: returnValue } });
         } else {
-            res.status(200).send({ Response: { "status": 200, "success": true, message: "Data Not found" }});
+            res.status(200).send({ Response: { "status": 200, "success": true, message: "Data Not found" } });
         }
     }
     static async findById(req: Request, res: Response) {
@@ -17,9 +17,9 @@ export class StateController {
             state_id: req.query.state_id
         });
         if (returnValue.length > 0) {
-            res.status(200).send({ Response:{ "status": 200, "success": true, data: returnValue }});
+            res.status(200).send({ Response: { "status": 200, "success": true, data: returnValue } });
         } else {
-            res.status(200).send({ Response:{ "status": 200, "success": false, message: "Data Not found" }});
+            res.status(200).send({ Response: { "status": 200, "success": true, message: "Data Not found" } });
         }
     }
 }
