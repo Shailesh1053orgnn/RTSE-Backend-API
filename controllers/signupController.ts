@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { IsignupModel } from '../@types/signupType.js';
 import { signupModel } from '../models/signup.model.js';
+import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import twilio from 'twilio';
 export class signupController {
   static async register(req: Request, res: Response) {
     if (!req.body.hasOwnProperty('fullName') || typeof (req.body.fullName) != "string") {
@@ -18,16 +18,14 @@ export class signupController {
         mobileNo: req.body.mobileNo,
         otp: otp
       });
-      const accountSid = "ACfabcbe7eb5b53e67caa46b6e8029c38c";
-      const authToken = "c148e2ad7952382dd854a90481f056a7";
-      const client = twilio(accountSid, authToken);
-      client.messages
-        .create({
-          body: 'Your OTP for login: ' + otp,
-          to: '+91' + req.body.mobileNo, // Text this number
-          from: '+19137529762', // From a valid Twilio number
-        })
-        .then((message) => console.log());
+      axios({
+        method: 'get',
+        url: 'http://smsjipra.in/http-api.php?username=narresh123&password=narresh123&senderid=HIRODR&route=4&number='+ req.body.mobileNo +'&message=Dear Student, OTP to login your HIGHER ORDER platform is '+ otp +'. Do not share it with anyone&templateid=1007468468524884905',
+        responseType: 'stream'
+      })
+        .then(function (response) {
+          response
+        });
       if (returnValue == "sent otp") {
         res.status(200).send({ "status": 200, "success": true, "isRegisterd": true, message: "OTP send Successfully" });
       }

@@ -5,10 +5,10 @@ dotenv.config();
 //local mysql db connection
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host     : 'rtse-sports.cmihklc4k4mb.ap-south-1.rds.amazonaws.com',
-  user     : 'admin',
-  password : 'Delhi123$',
-  database : 'rtsc_sports'
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'rtse_sports'
 });
 // const mailjet = Mailjet.apiConnect(
 //   process.env.MJ_APIKEY_PUBLIC,
